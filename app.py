@@ -14,7 +14,7 @@ from flask import Flask, jsonify, request, Response
 import json
 from flask_cors import CORS
 import socket
-
+import os
 def setup_logging():
     """Configure logging with basic formatting"""
     logging.basicConfig(
@@ -320,6 +320,8 @@ def run_api(host='0.0.0.0', port=5000, with_captioning=True):
 
 # Modified main function to support both local streaming and API mode
 if __name__ == "__main__":
+    port = int(os.environ.get('PORT', 5000))
+    run_api(host='0.0.0.0', port=port, with_captioning=True)
     logger = setup_logging()
     
     # Default to API mode with captioning
